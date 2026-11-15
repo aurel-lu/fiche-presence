@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Fiche de présence</title>
+  <meta name="description" content="Suivi personnel des absences et de la marge de 20 % par matière.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#f9f9f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d0d0d" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Présence">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="icon" href="icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <main class="pane week" aria-label="Emploi du temps de la semaine">
+      <header class="weekbar">
+        <button type="button" class="ibtn" id="prev" aria-label="Semaine précédente"></button>
+        <button type="button" class="weekpick" id="weekpick" aria-haspopup="dialog" aria-label="Choisir une semaine">
+          <span class="wk-title" id="wkTitle"></span>
+          <span class="wk-sub" id="wkSub"></span>
+        </button>
+        <button type="button" class="ibtn" id="next" aria-label="Semaine suivante"></button>
+        <button type="button" class="ibtn" id="today" aria-label="Revenir à la semaine en cours" hidden></button>
+        <button type="button" class="ibtn" id="menu" aria-haspopup="dialog" aria-label="Réglages"></button>
+      </header>
+      <div class="grid" id="grid"></div>
+      <div class="key" id="key"></div>
+      <p class="hint" id="hint"></p>
+    </main>
+
+    <aside class="pane stats" id="stats" aria-label="Bilan des absences">
+      <section class="card" id="pieCard"></section>
+      <section class="card" id="heroCard"></section>
+      <section class="card" id="meterCard"></section>
+    </aside>
+  </div>
+
+  <dialog class="sheet" id="sheet"></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <input type="file" id="fileXlsx" class="vh" tabindex="-1" aria-hidden="true" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+  <input type="file" id="fileJson" class="vh" tabindex="-1" aria-hidden="true" accept=".json,application/json">
+
+  <noscript>Cette application a besoin de JavaScript.</noscript>
+  <script src="core.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
