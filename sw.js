@@ -1,14 +1,17 @@
 /* Mode hors-ligne : l'app est mise en cache à l'installation, puis servie depuis le cache
  * pendant qu'une copie fraîche est récupérée en arrière-plan pour l'ouverture suivante.
  * Changer VERSION à chaque mise en ligne pour que tous les fichiers soient renouvelés ensemble. */
-const VERSION = 'fiche-presence-2';
+const VERSION = 'fiche-presence-3';
 const ASSETS = [
   './', 'index.html', 'styles.css', 'core.js', 'data.js', 'app.js', 'manifest.webmanifest',
   'icons/favicon.svg', 'icons/icon-180.png', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-maskable-512.png',
 ];
 
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(VERSION).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting()));
+  // « reload » : on va chercher les fichiers sur le serveur, sans passer par le cache du navigateur,
+  // pour que la nouvelle version soit complète et cohérente dès son activation.
+  const fresh = ASSETS.map(url => new Request(url, { cache: 'reload' }));
+  event.waitUntil(caches.open(VERSION).then(cache => cache.addAll(fresh)).then(() => self.skipWaiting()));
 });
 
 self.addEventListener('activate', event => {
