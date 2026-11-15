@@ -204,7 +204,7 @@ if (fs.existsSync(xlsx)) {
     assert.deepEqual(show(day('2026-11-16', 0)), ['0+2 c LV2 (ZT) 3h', '2+1 c GIPEX (MT+IEH)', '3+1 c GIPEX (MT+IEH)']);
     assert.deepEqual(show(day('2026-11-16', 1)), ['0+1 x Stage/poursuite étude', '1+1 c Data (NF) info', '2+1 c Data (NF) info', '3+1 c Data (NF) info']);
     assert.deepEqual(show(day('2026-11-16', 2)), ['0+4 o FERIE']);
-    assert.deepEqual(show(day('2026-11-16', 3)), ['0+1 c Data (NF) info', '1+1 c Data (NF) info', '2+2 x Conférence']);
+    assert.deepEqual(show(day('2026-11-16', 3)), ['0+1 c Data (NF) info', '1+1 c Data (NF) info', '2+2 x Conf.']);
     assert.deepEqual(show(day('2026-11-16', 4)), ['0+1 c Data (NF) info', '1+1 c Data (NF) info', '2+1 c Data (NF) info', '3+1 x PJT9']);
   });
   test('Excel : blocs fusionnés, vacances, cases grisées', () => {
@@ -226,7 +226,7 @@ if (fs.existsSync(xlsx)) {
   });
   test('Excel : aucun nom complet dans les données publiques', () => {
     const labels = [...new Set(publicTimetable(JSON.parse(JSON.stringify(tt))).weeks.flatMap(w => w.days.flat().map(b => b.t)))];
-    assert.ok(labels.includes('Conférence') && labels.includes('SGSE (SA)') && labels.includes('Conf TE.'));
+    assert.ok(labels.includes('Conf.') && labels.includes('SGSE (SA)') && labels.includes('Conf TE.'));
     assert.ok(labels.includes('Robotique (RB+RBe) info') && labels.includes('GIPEX(supply chain)') && labels.includes('AN9 (Sana)'));
     assert.deepEqual(labels.filter(t => /^Conf\. /.test(t)), []);
     assert.deepEqual(labels.filter(t => /\(([^)]*)\)/.test(t) && /\p{Lu}{1,2}\p{Ll}{4,}/u.test(t.match(/\(([^)]*)\)/)[1])), []);

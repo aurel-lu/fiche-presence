@@ -4,8 +4,8 @@
 
 export function publicLabel(label) {
   return label
-    // « Conf. Prénom Nom » → « Conférence » (« Conf TE. », nom d'entreprise, n'est pas touché)
-    .replace(/^Conf\.\s+\p{Lu}\p{Ll}+(\s+\p{Lu}[\p{L}'’-]*)+$/u, 'Conférence')
+    // « Conf. Prénom Nom » → « Conf. » (« Conf TE. », nom d'entreprise, n'est pas touché)
+    .replace(/^Conf\.\s+\p{Lu}\p{Ll}+(\s+\p{Lu}[\p{L}'’-]*)+$/u, 'Conf.')
     // entre parenthèses, un nom de famille écrit en entier est réduit à ses majuscules : « (JDupont) » → « (JD) »
     .replace(/\(([^)]*)\)/g, (m, inner) =>
       '(' + inner.replace(/\b\p{Lu}{1,2}\p{Ll}{4,}\b/gu, word => word.replace(/\p{Ll}/gu, '')) + ')');
